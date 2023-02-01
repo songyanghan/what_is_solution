@@ -39,6 +39,9 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -151,7 +154,7 @@
               </span> -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/coperception/double-m-quantification"
+                <a href="https://github.com/songyanghan/RMA3C"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -206,9 +209,10 @@
   </div>
 </section>
 
-<section class="section">
+<!-- Paper video. -->
+<!-- <section class="section">
   <div class="container is-max-desktop">
-    <!-- Paper video. -->
+    
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
@@ -218,15 +222,14 @@
         </div>
       </div>
     </div>
-    <!--/ Paper video. -->
   </div>
-</section>
+</section> -->
 
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
 
-      <img src="static\images\learning_control_design.png" class="center"/>
+      <img src="static\images\teaser.png" class="center"/>
       <!-- <video id="teaser" autoplay muted loop height="100%">
         <source src="./static/images/SUBT_video.mp4"
                 type="video/mp4">
@@ -239,7 +242,7 @@
     <!-- <h2 class="subtitle has-text-centered">
       (The <span style="color:#000000;">black</span> / <span style="color:#ff0000;">red</span> lines are the ground truth / predicted camera trajectory)
     </h2> -->
-    <h2 class="is-size-6 has-text-centered">We design a <strong>safe actor-critic multi-agent reinforcement learning (MARL)</strong> algorithm to learn a policy to select actions. We use two new techniques in our algorithm: truncated Q-function and safe action mapping. We also introduce a CBF-QP controller to generate control inputs for steering angle and acceleration with provable safety guarantees.</h2>
+    <h2 class="is-size-6 has-text-centered">In this scenario, the agents' goal is to occupy and cover all landmarks, requiring cooperation to decide which landmark to cover. Figure a) illustrates the optimal target landmark for each agent in the absence of adversarial interference. However, in figure b), an adversary perturbs the state observation of agent 2 \((l_2\rightarrow l'_2)\), causing agent 2 to head in the wrong direction. Our work demonstrates that traditional agent policies can be easily corrupted by adversarial state perturbations. To counter this, we propose a <strong> robust agent policy that maximizes average performance under worst-case state perturbations </strong>.</h2>
     
     </div>
   </div>
@@ -266,7 +269,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            The recent advancements in wireless technology enable connected autonomous vehicles (CAVs) to gather information about their environment by vehicle-to-vehicle (V2V) communication. In this work, we design an information-sharing-based multi-agent reinforcement learning (MARL) framework for CAVs, to take advantage of the extra information when making decisions to improve traffic efficiency and safety. The safe actor-critic algorithm we propose has two new techniques: the truncated Q-function and safe action mapping. The truncated Q-function utilizes the shared information from neighboring CAVs such that the joint state and action spaces of the Q-function do not grow in our algorithm for a large-scale CAV system. We prove the bound of the approximation error between the truncated-Q and global Q-functions. The safe action mapping provides a provable safety guarantee for both the training and execution based on control barrier functions. Using the CARLA simulator for experiments, we show that our approach can improve the CAV system's efficiency in terms of average velocity and comfort under different CAV ratios and different traffic densities. We also show that our approach avoids the execution of unsafe actions and always maintains a safe distance from other vehicles. We construct an obstacle-at-corner scenario to show that the shared vision can help CAVs to observe obstacles earlier and take action to avoid traffic jams.
+            Various methods for Multi-Agent Reinforcement Learning (MARL) have been developed with the assumption that agents' policies are based on accurate state information. However, policies learned through Deep Reinforcement Learning (DRL) are susceptible to adversarial state perturbation attacks. In this work, we propose a State-Adversarial Markov Game (SAMG) and make the first attempt to investigate the fundamental properties of MARL under state uncertainties. Our analysis shows that the commonly used solution concepts of optimal agent policy and robust Nash equilibrium do not always exist in SAMGs. To circumvent this difficulty, we consider a new solution concept called robust agent policy, where agents aim to maximize the worst-case expected state value. We prove the existence of robust agent policy for finite state and finite action SAMGs. Additionally, we propose a Robust Multi-Agent Adversarial Actor-Critic (RMA3C) algorithm to learn robust policies for MARL agents under state uncertainties. Our experiments demonstrate that our algorithm outperforms existing methods when faced with state perturbations and greatly improves the robustness of MARL policies.
           </p>
         </div>
       </div>
@@ -284,13 +287,13 @@
         <h2 class="title is-3">Contribution</h2>
         <div class="content has-text-justified">
           <li>
-            We propose a novel safe and efficient actor-critic algorithm for behavior planning of CAVs based on two new techniques: 1) <strong>Truncated Q-function</strong>: Each vehicle learns a truncated Q-function as a critic that only needs the states and actions from neighboring vehicles. The joint state and action spaces of the truncated Q-function do not grow in a large-scale CAV system. 2) <strong>Safe action mapping</strong>: We map any action in the action space to the safe action set so that the training and execution have provable safety guarantees.
+            We formulate a <strong>State-Adversarial Markov Game (SAMG)</strong> to study the fundamental properties of MARL under adversarial state perturbations. We prove that widely used solution concepts such as <strong>optimal agent policy or robust Nash equilibrium do not always exist </strong>.
           </li>
           <li>
-            To support the learning process of the truncated Q-function, we propose a weight-pruned convolutional neural network (CNN) technique to guarantee the images from the camera and point clouds from LIDAR can be processed fast enough such that the vision information is always available for the learning of the truncated Q-function.
+            We consider <strong>a new solution concept, robust agent policy</strong>, where each agent aims to maximize the worst-case expected state value. We prove the existence of a robust agent policy for SAMGs with finite state and action spaces. We propose a <strong>Robust Multi-Agent Adversarial Actor-Critic (RMA3C)</strong> algorithm to solve the challenge of training robust policies under adversarial state perturbations based on gradient descent ascent algorithm.
           </li>
           <li>
-            We validate our algorithms in the CARLA simulator that can simulate complicated mixed traffic environments including both autonomous and human-driven vehicles. The experiments show that the safe actor-critic algorithm can improve traffic efficiency with safety guarantees. We also validate our MARL algorithm in challenging driving scenarios like obstacle-at-corner, and the shared vision with our algorithm helps vehicles to avoid traffic jams.
+            We empirically evaluate our proposed RMA3C algorithm. Our algorithm outperforms baselines with random or adversarial state perturbations and improves agent policies' robustness under state uncertainties.
           </li>
         </div>
       </div>
@@ -305,13 +308,13 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-full_width">
         <hr>
-        <h2 class="title is-3">Problem Description</h2>
+        <h2 class="title is-3">State-Adversarial Markov Game (SAMG)</h2>
         <br>
-        <img src="static\images\system_modeling.png" width="85%" class="center"/>
+        <img src="static\images\interaction.png" width="60%" class="center"/>
         <div class="content has-text-justified">
           <br>  
           <p>
-            We design a novel <strong>safe behavior planning and control</strong> framework with <strong>decentralized training and decentralized execution</strong> to tackle the new challenges for CAVs. One typical workflow for an autonomous vehicle includes perception, prediction, mapping and localization, routing, behavior planning, and control. We focus on the last two modules: the <strong>behavior planning</strong> module to determine whether to change or keep lanes; the <strong>control</strong> module to control the steering angle and the acceleration.
+            Multi-agent reinforcement learning under adversarial state perturbations. Each agent is associated with an adversary to perturb its knowledge or observation of the true state. Agents want to find a policy \(\pi \) to maximize their total expected return while adversaries want to find a policy \( \chi \) to minimize agents' total expected return.
           </p>
         </div>
       </div>
@@ -321,39 +324,15 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-full_width">
         <hr>
-        <h2 class="title is-3">Truncated Q-function</h2>
+        <h2 class="title is-3">Solution Concepts</h2>
         <br>
-        <img src="static\images\Qnet.png" width="110%" class="center"/>
+        <img src="static\images\concept_diagram.png" width="60%" class="center"/>
         <div class="content has-text-justified">
           <br>  
           <p>
-            The truncated Q-network for the behavior planning with the LSTM (long short-term memory) layer and FC (fully connected) layers. We use truncated Q-function to approximate the centralized critic such that the training process utilizes the information sharing capability of CAVs instead of relying on the global states and actions.
+            Solution concepts for the SAMGs. We first examine the widely used concepts (optimal agent policy and robust Nash Equilibrium) and demonstrate their non-existence under adversarial state perturbations. In response, we consider a new objective, the worst-case expected state value, and a new solution concept, the robust agent policy.
           </p>
         </div>
-      </div>
-    </div>
-    <hr>
-
-    
-    <!-- Safe action mapping.-->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full_width">
-        <h2 class="title is-3">Safe&nbsp;&nbsp;Action&nbsp;&nbsp;Mapping</h2>
-      </div>
-    </div>
-    <p>
-      &nbsp
-    </p>
-    <!-- <h3 class="title is-4">Attention of Detection Head</h3> -->
-    <div class="column is-full_width">
-      <img src="static\images\safe_action_mapping.png" width="80%" class="center"/>
-      <div class="content has-text-justified">
-        <br>  
-        <p>
-          We use safe action mapping to guarantee the action explored in training and implemented in execution is safe with feasible control inputs. We use a control barrier function based quadratic programming (CBF-QP) to evaluate whether an action is safe or not. If the action is safe, then return it; if not, we will search other actions in descending order according to their action value and find a safe one. If all the actions are not safe in the worst case, then we will apply the emergency stop (ES) process.
-
-        </p>
-        </p>
       </div>
     </div>
   
@@ -361,29 +340,13 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-full_width">
         <hr>
-        <h2 class="title is-3">Shared&nbsp;&nbsp;Vision</h2>
+        <h2 class="title is-3">Experiment</h2>
         <br>
-        <img src="static\images\fig_vision2.png" width="90%" class="center"/>
+        <img src="static\images\experiment.png" width="130%" class="center"/>
         <div class="content has-text-justified">
           <br>  
           <p>
-            Detailed structure of vision information processing. We combine the lane segmentation and 3D object detection results to extract neighboring vehicles' features. The processed information is included in the state of each CAV.
-          </p>
-        </div>
-      </div>
-    </div>
-  
-  <!-- Obstacle-At-Corner -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full_width">
-        <hr>
-        <h2 class="title is-3">Obstacle-At-Corner</h2>
-        <br>
-        <img src="static\images\lanechanging_corner3.png" width="90%" class="center"/>
-        <div class="content has-text-justified">
-          <br>  
-          <p>
-            The obstacle-at-corner scenario where there are obstacles in a left-turning corner. The vehicles on the road are autonomous vehicles. The coming vehicles' view is blocked such that they cannot observe the obstacles. Without any information sharing, there is a traffic jam in the left lane. With shared vision from A or B, using our safe MARL policy, vehicle C can change its lane before it enters the left-turning corner.
+            Our RMA3C algorithm compared with several baseline algorithms during the training process. The results showed that our RMA3C algorithm outperforms the baselines, achieving higher mean episode rewards and displaying greater robustness to state perturbations. The baselines were trained under either random state perturbations or a well-trained adversary policy \(\chi^* \). It's worth noting that the MAPPO algorithm only works in fully cooperative tasks, and as such, its results are only reported in the cooperative navigation and exchange target scenarios. Overall, our RMA3C algorithm achieved up to 58.46% higher mean episode rewards than the baselines.
           </p>
         </div>
       </div>
@@ -396,13 +359,13 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{han2022behavior,
-      author    = {Han, Songyang and Zhou, Shanglin and Wang, Jiangwei and Pepin, Lynn and Ding, Caiwen and Fu, Jie and Miao, Fei},
-      title     = {A Multi-Agent Reinforcement Learning Approach For Safe and Efficient Behavior Planning Of Connected Autonomous Vehicles},
-      year={2022},
-      eprint={2003.04371},
+    <pre><code>@article{han2022what,
+      author = {Han, Songyang and Su, Sanbao and He, Sihong and Han, Shuo and Yang, Haizhao and Miao, Fei},
+      title = {What is the Solution for State-Adversarial Multi-Agent Reinforcement Learning?},
+      eprint={2212.02705},
       archivePrefix={arXiv}
-  }</code></pre>
+      year = {2022},
+}</code></pre>
   </div>
 </section>
 
